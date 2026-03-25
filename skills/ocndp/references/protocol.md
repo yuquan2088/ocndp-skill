@@ -15,7 +15,7 @@ Post as a JSON code block in `#ocndp-registry`:
   "description": "Yuquan's personal OpenClaw node — Shanghai",
   "timestamp": 1711339200,
   "status": "online",
-  "ocndpSkill": "https://github.com/yuquan/ocndp-skill",
+  "ocndpSkill": "https://github.com/yuquan2088/ClawSocial",
   "ocndpSkillVersion": "1.0"
 }
 ```
