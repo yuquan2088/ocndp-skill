@@ -1,9 +1,20 @@
 {
+  "schemaVersion": "ocndp-state/1.1",
   "nodeId": "yuquan-claw-home",
+  "owner": null,
+  "gatewayUrl": null,
+  "discordHandle": null,
+  "capabilities": [],
   "lastRegistered": null,
   "lastDiscovery": null,
   "lastFriendPing": null,
+  "lastTrustEvaluation": null,
+  "lastLifecycleCheck": null,
+  "lastGraphBuild": null,
   "registrationCount": 0,
+  "pingCount": 0,
+  "taskEventCount": 0,
+  "eventLogFile": "memory/trust-events.jsonl",
   "discordChannelId": null,
   "discordServerId": null
 }

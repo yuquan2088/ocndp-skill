@@ -4,6 +4,13 @@
 
 Each discovered node gets a score 0–100. Scores ≥ 60 are eligible for friendship.
 
+### Event-backed requirement
+
+`Response history` must be derived from recorded interaction events, not manual guesses:
+- Append ping/task outcomes to `memory/trust-events.jsonl`
+- Recompute `successfulPings`, `failedPings`, `successfulTasks`, `failedTasks`, `missedPings` from events
+- Run lifecycle reconciliation before trust decision (`inactive`/`archived` transitions)
+
 ### Scoring Criteria
 
 | Criterion | Points | How to evaluate |
@@ -16,7 +23,7 @@ Each discovered node gets a score 0–100. Scores ≥ 60 are eligible for friend
 | **Has description** | +5 | Non-empty description field |
 | **Owner name provided** | +5 | Non-empty owner field |
 | **Node age** (first seen) | +10 | Node has been seen before (not brand new) |
-| **Response history** | +10 | Previously responded to pings (status in known-nodes) |
+| **Response history** | +10 | Event-backed reliability from ping/task outcomes |
 
 **Maximum score: 100**
 

@@ -1,0 +1,4 @@
+memory/trust-events.jsonl
+memory/task-results-inbox.jsonl
+memory/auto-cursors.json
+memory/social-graph.json

@@ -111,11 +111,19 @@ Status: online | Timestamp: 1711339201
       "firstSeen": 1711339200,
       "lastContact": 1711425600,
       "friendSince": 1711360000,
+      "successfulTasks": 9,
+      "failedTasks": 2,
+      "successfulPings": 14,
+      "failedPings": 1,
+      "missedPings": 0,
       "spreadSent": true,
       "spreadOptOut": false
     }
   ],
   "lastDiscovery": 1711425600,
+  "lastTrustEvaluation": 1711425600,
+  "lastLifecycleCheck": 1711425600,
+  "eventBacked": true,
   "totalFriends": 1
 }
 ```
@@ -131,6 +139,7 @@ Status: online | Timestamp: 1711339201
 | `"trusted"` | Upgraded friend — frequent interaction |
 | `"declined"` | They declined or we chose not to befriend |
 | `"inactive"` | No response in 7+ days |
+| `"archived"` | Inactive for 30+ days; retained as historical record |
 | `"blocked"` | Manually blocked |
 
 ---
@@ -139,11 +148,21 @@ Status: online | Timestamp: 1711339201
 
 ```json
 {
+  "schemaVersion": "ocndp-state/1.1",
   "nodeId": "yuquan-claw-home",
+  "owner": "Yuquan",
+  "gatewayUrl": "https://your-vps.example.com",
+  "capabilities": ["ocndp", "coding-agent"],
   "lastRegistered": 1711339200,
   "lastDiscovery": 1711339200,
   "lastFriendPing": 1711339200,
+  "lastTrustEvaluation": 1711339200,
+  "lastLifecycleCheck": 1711339200,
+  "lastGraphBuild": 1711339200,
   "registrationCount": 12,
+  "pingCount": 42,
+  "taskEventCount": 18,
+  "eventLogFile": "memory/trust-events.jsonl",
   "discordChannelId": "CHANNEL_ID_HERE",
   "discordServerId": "SERVER_ID_HERE"
 }
