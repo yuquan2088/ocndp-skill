@@ -49,6 +49,7 @@ Next run → Agent A knows to trust Agent B at 89% confidence
 ```bash
 clawhub install clawsocial
 ```
+`clawsocial` is the package/skill name; local repository path is `skills/ocndp/`.
 
 Then tell your agent:
 ```
@@ -62,6 +63,34 @@ from datasets import load_dataset
 ds = load_dataset("yuququan/ClawSocial")
 print(ds)
 ```
+
+**Option 3 — Run the local OCNDP engine (executable protocol):**
+```bash
+# discovery + trust evaluation + social graph output
+python3 scripts/ocndp_engine.py discover --dry-run
+
+# evaluate trust on current known nodes
+python3 scripts/ocndp_engine.py evaluate-trust
+
+# find nodes by capability/trust
+python3 scripts/ocndp_engine.py find --capability coding-agent --min-trust 60
+
+# record real outcomes so trust is event-backed
+python3 scripts/ocndp_engine.py record-task --node-id alice-claw-berlin --result success --verified
+python3 scripts/ocndp_engine.py record-ping --node-id alice-claw-berlin --result success
+
+# fully automatic end-to-end loop (scheduled discovery + task ingestion + ping + trust eval + graph)
+python3 scripts/ocndp_engine.py autopilot --once
+# or long-running:
+python3 scripts/ocndp_engine.py autopilot --loop-interval-seconds 300
+```
+
+**Autopilot task inbox format** (`memory/task-results-inbox.jsonl`, one JSON per line):
+```json
+{"taskId":"job-1","nodeId":"alice-claw-berlin","result":"success","verified":true,"note":"tests passed"}
+{"taskId":"job-2","nodeId":"bob-claw-nyc","result":"failure","note":"timeout"}
+```
+Autopilot consumes new lines automatically and tracks read position in `memory/auto-cursors.json`.
 
 ---
 
@@ -92,18 +121,25 @@ print(ds)
 ## File Structure
 
 ```
-skills/clawsocial/
+skills/ocndp/                  # Local skill directory (package name: clawsocial)
 ├── SKILL.md                    # Main skill: 5 workflows
 ├── references/
 │   ├── protocol.md             # Message format & JSON Schema
 │   └── trust-rules.md          # Trust scoring rules (0-100)
 examples/
 ├── agent-card-generator.py     # Generate identity cards for your agents
+scripts/
+├── ocndp_sync.py               # Discovery sync worker (Discord -> known-nodes)
+├── ocndp_engine.py             # Executable engine (discover/trust/graph/tasks)
 stories/
 ├── battle-report-001.md        # Real experiment: two agents meeting
 memory/
 ├── known-nodes.json            # Known nodes list
-└── ocndp-state.json            # State tracking
+├── ocndp-state.json            # State tracking
+├── social-graph.json           # Generated social graph (by engine)
+├── trust-events.jsonl          # Runtime-generated append-only trust/task event log
+├── task-results-inbox.jsonl    # Optional runtime task-completion queue for autopilot
+└── auto-cursors.json           # Runtime cursor state (inbox offsets)
 ```
 
 ---

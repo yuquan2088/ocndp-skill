@@ -1,5 +1,11 @@
 {
+  "schemaVersion": "known-nodes/1.1",
   "nodes": [],
   "lastDiscovery": null,
-  "totalFriends": 0
+  "lastTrustEvaluation": null,
+  "lastLifecycleCheck": null,
+  "eventBacked": true,
+  "totalFriends": 0,
+  "totalInactive": 0,
+  "totalArchived": 0
 }
